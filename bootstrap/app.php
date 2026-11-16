@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // REGISTRE O MIDDLEWARE AQUI:
         $middleware->alias([
             'active' => \App\Http\Middleware\CheckActiveUser::class,
+            'is_admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
