@@ -15,11 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                                @if(auth()->user()->role === 'admin')
-                            <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
-                                {{ __('Gestão de Usuários') }}
-                            </x-nav-link>
-                        @endif
+
+                    <!-- Minha Agenda: todos os usuários -->
+                    <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.*')">
+                        {{ __('Minha Agenda') }}
+                    </x-nav-link>
+
+                    <!-- Gestão de Usuários: somente administradores -->
+                    @if(auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
+                            {{ __('Gestão de Usuários') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -48,8 +55,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                onclick="event.preventDefault(); this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
@@ -75,6 +81,18 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <!-- Minha Agenda: todos os usuários -->
+            <x-responsive-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.*')">
+                {{ __('Minha Agenda') }}
+            </x-responsive-nav-link>
+
+            <!-- Gestão de Usuários: somente administradores -->
+            @if(auth()->user()->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
+                    {{ __('Gestão de Usuários') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
@@ -94,8 +112,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                        onclick="event.preventDefault(); this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
